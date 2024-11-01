@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background: black;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Canvas styling */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Content styling */
+        .content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+
+        /* Introduction section */
+        .intro-section {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        /* Download section */
+        .download-section {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .app-details {
+            background: rgba(0, 255, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        /* Text styling */
+        h1, h2, h3 {
+            color: #0f0;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin: 10px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        li:before {
+            content: ">";
+            color: #0f0;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Download button */
+        .download-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #0f0;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .download-button:hover {
+            background: #00ff00;
+            box-shadow: 0 0 20px #0f0;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+
+    <div class="content">
+        <div class="intro-section">
+            <h1>Professional Journey</h1>
+            
+            <p>Hello, my name is Derek Brouillette. I'm a transitioning professional with 20 years of experience as a truck driver, now pursuing my passion in computer science. At 45, I'm embracing a new chapter in my life, combining my rich work experience with cutting-edge technical skills.</p>
+            
+            <p>After medical retirement from trucking, I've found my true calling in programming. My journey in computer science has been marked by dedication and academic excellence, maintaining a perfect 4.0 GPA while balancing family responsibilities as a devoted father to three sons.</p>
+
+            <h2>Academic Achievements</h2>
+            <ul>
+                <li>Associates Degree in Computer Science</li>
+                <li>Currently pursuing Bachelor's Degree (Expected completion: 2025)</li>
+                <li>Member of Alpha Chi Honor Society</li>
+                <li>Member of National Society of Leadership and Success (NSLS)</li>
+                <li>Maintaining 4.0 GPA throughout academic career</li>
+            </ul>
+        </div>
+
+        <div class="download-section">
+            <h2>My Applications</h2>
+            
+            <div class="app-details">
+                <h3>Quantum Simulator</h3>
+                <p>A quantum computing simulation application that demonstrates quantum computing concepts and simulations.</p>
+                <ul>
+                    <li>Interactive quantum circuit simulation</li>
+                    <li>Educational quantum computing demonstrations</li>
+                    <li>User-friendly interface</li>
+                    <li>System Requirements: Linux/Windows compatible</li>
+                </ul>
+                <p>Version: 1.0.0</p>
+                <p>File Size: 56.3 MB</p>
+            </div>
+
+            <a href="./QuantumSimulator.zip" download>Download File
+
+
+                Download Quantum Simulator
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size to window size
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Matrix characters
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+        const fontSize = 14;
+        const columns = Math.floor(canvas.width / fontSize);
+        
+        const drops = new Array(columns).fill(1);
+
+        ctx.font = `${fontSize}px monospace`;
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0F0';
+
+            for(let i = 0; i < drops.length; i++) {
+                const char = characters[Math.floor(Math.random() * characters.length)];
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>
