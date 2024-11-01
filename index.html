@@ -34,7 +34,7 @@
             z-index: 1;
             max-width: 800px;
             margin: 40px auto;
-            padding: 30px;
+            padding: 20px;
         }
 
         /* Introduction section */
@@ -93,8 +93,17 @@
             left: 0;
         }
 
-        /* Download button */
-        .download-button {
+        /* Button container */
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* Download and link buttons */
+        .button {
             display: inline-block;
             padding: 15px 30px;
             background: #0f0;
@@ -102,14 +111,37 @@
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            margin: 10px;
+            text-align: center;
             transition: all 0.3s ease;
+            min-width: 200px;
         }
 
-        .download-button:hover {
+        .button:hover {
             background: #00ff00;
             box-shadow: 0 0 20px #0f0;
             transform: scale(1.05);
+        }
+
+        .button.android {
+            background: #3DDC84;
+        }
+
+        .button.wix {
+            background: #0066FF;
+            color: white;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 600px) {
+            .content {
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .button {
+                width: 100%;
+                margin: 5px 0;
+            }
         }
     </style>
 </head>
@@ -144,17 +176,17 @@
                     <li>Interactive quantum circuit simulation</li>
                     <li>Educational quantum computing demonstrations</li>
                     <li>User-friendly interface</li>
-                    <li>System Requirements: Linux/Windows compatible</li>
+                    <li>System Requirements: Linux/Windows/Android compatible</li>
                 </ul>
                 <p>Version: 1.0.0</p>
                 <p>File Size: 56.3 MB</p>
             </div>
 
-            <a href="./QuantumSimulator.zip" download>Download File
-
-
-                Download Quantum Simulator
-            </a>
+            <div class="button-container">
+                <a href="./QuantumSimulator.zip" class="button" download>Download for Desktop</a>
+                <a href="./QuantumSimulator.apk" class="button android">Download for Android</a>
+                <a href="YOUR_WIX_URL_HERE" class="button wix" target="_blank">Visit My Wix Portfolio</a>
+            </div>
         </div>
     </div>
 
