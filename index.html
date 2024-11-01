@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Portfolio</title>
+    <title>Professional Portfolio - Derek Brouillette</title>
     <style>
         /* Reset and base styles */
         * {
@@ -37,8 +37,8 @@
             padding: 20px;
         }
 
-        /* Introduction section */
-        .intro-section {
+        /* Section styling */
+        .section {
             background: rgba(0, 0, 0, 0.8);
             padding: 20px;
             border-radius: 10px;
@@ -46,21 +46,35 @@
             box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
         }
 
-        /* Download section */
-        .download-section {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        /* Photo gallery */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
         }
 
-        .app-details {
-            background: rgba(0, 255, 0, 0.1);
-            padding: 20px;
+        .photo-container {
+            position: relative;
+            padding-bottom: 100%;
+            overflow: hidden;
             border-radius: 10px;
-            margin: 20px 0;
-            text-align: left;
+            border: 2px solid #0f0;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+        }
+
+        .photo-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* Text styling */
@@ -93,7 +107,7 @@
             left: 0;
         }
 
-        /* Button container */
+        /* Button styles */
         .button-container {
             display: flex;
             flex-wrap: wrap;
@@ -102,7 +116,6 @@
             margin-top: 20px;
         }
 
-        /* Download and link buttons */
         .button {
             display: inline-block;
             padding: 15px 30px;
@@ -131,16 +144,13 @@
             color: white;
         }
 
-        /* Mobile responsiveness */
         @media (max-width: 600px) {
             .content {
                 margin: 20px auto;
                 padding: 15px;
             }
-
             .button {
                 width: 100%;
-                margin: 5px 0;
             }
         }
     </style>
@@ -149,7 +159,7 @@
     <canvas id="matrix"></canvas>
 
     <div class="content">
-        <div class="intro-section">
+        <div class="section">
             <h1>Professional Journey</h1>
             
             <p>Hello, my name is Derek Brouillette. I'm a transitioning professional with 20 years of experience as a truck driver, now pursuing my passion in computer science. At 45, I'm embracing a new chapter in my life, combining my rich work experience with cutting-edge technical skills.</p>
@@ -166,7 +176,24 @@
             </ul>
         </div>
 
-        <div class="download-section">
+        <div class="section">
+            <h2>Family Life</h2>
+            <p>As a proud father of three wonderful sons, my family is my greatest inspiration. They motivate me to push boundaries and embrace new challenges every day.Pictured below is me and my younest son, in picture 2 is me and my brothers, and in picture 3 is my three sons together.</p>
+            
+            <div class="photo-gallery">
+                <div class="photo-container">
+                    <img src="photos/family1.jpg" alt="Family Photo 1">
+                </div>
+                <div class="photo-container">
+                    <img src="photos/family2.jpg" alt="Family Photo 2">
+                </div>
+                <div class="photo-container">
+                    <img src="photos/family3.jpg" alt="Family Photo 3">
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
             <h2>My Applications</h2>
             
             <div class="app-details">
@@ -184,8 +211,8 @@
 
             <div class="button-container">
                 <a href="./QuantumSimulator.zip" class="button" download>Download for Desktop</a>
-                <a href="./QuantumSimulator.apk" class="button android">Download for Android</a>
-                <a href="https://avcderek.wixsite.com/my-site" class="button wix" target="_blank">Visit My Wix Portfolio</a>
+                <a href="./QuantumSimulator.apk" class="button android" download>Download for Android</a>
+                <a href="https://avcderek.wixsite.com/my-site" class="button" style="background: #00ff00;">Visit My Wix Portfolio</a>
             </div>
         </div>
     </div>
@@ -194,7 +221,6 @@
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
 
-        // Set canvas size to window size
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -202,7 +228,6 @@
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        // Matrix characters
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
         const fontSize = 14;
         const columns = Math.floor(canvas.width / fontSize);
