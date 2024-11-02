@@ -139,9 +139,11 @@
             background: #3DDC84;
         }
 
-        .button.wix {
-            background: #0066FF;
-            color: white;
+        .download-note {
+            color: #0f0;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 15px;
         }
 
         @media (max-width: 600px) {
@@ -178,7 +180,7 @@
 
         <div class="section">
             <h2>Family Life</h2>
-            <p>As a proud father of three wonderful sons, my family is my greatest inspiration. They motivate me to push boundaries and embrace new challenges every day.Pictured below is me and my younest son, in picture 2 is me and my brothers, and in picture 3 is my three sons together.</p>
+            <p>As a proud father of three wonderful sons, my family is my greatest inspiration. They motivate me to push boundaries and embrace new challenges every day. Pictured below is me and my youngest son, in picture 2 is me and my brothers, and in picture 3 is my three sons together.</p>
             
             <div class="photo-gallery">
                 <div class="photo-container">
@@ -193,61 +195,44 @@
             </div>
         </div>
 
-        <!-- Replace the existing app section with this code -->
-<div class="section">
-    <h2>My Applications</h2>
-    
-    <div class="app-details">
-        <h3>Quantum Simulator</h3>
-        <p>A quantum computing simulation application that demonstrates quantum computing concepts and simulations.</p>
-        <ul>
-            <li>Interactive quantum circuit simulation</li>
-            <li>Educational quantum computing demonstrations</li>
-            <li>User-friendly interface</li>
-            <li>System Requirements: Linux/Windows/Android compatible</li>
-        </ul>
-        <p>Version: 1.0.0</p>
-        <p>File Size: 56.3 MB</p>
-    </div>
-
-    <div class="button-container">
-        <a href="https://storage.googleapis.com/your-bucket-name/QuantumSimulator.zip" 
-           class="button" 
-           download="QuantumSimulator.zip"
-           id="desktop-download">Download for Desktop</a>
-        
-        <a href="https://storage.googleapis.com/your-bucket-name/QuantumSimulator.apk" 
-           class="button android" 
-           download="QuantumSimulator.apk"
-           id="android-download">Download for Android</a>
-        
-        <a href="https://avcderek.wixsite.com/my-site" 
-           class="button" 
-           style="background: #00ff00;">Visit My Wix Portfolio</a>
-    </div>
-
-    <!-- Add download tracking -->
-    <script>
-        document.getElementById('android-download').addEventListener('click', function(e) {
-            // Optional: Add download tracking
-            console.log('Android download started');
+        <div class="section">
+            <h2>My Applications</h2>
             
-            // Check if running on Android
-            const isAndroid = /Android/i.test(navigator.userAgent);
-            if (!isAndroid) {
-                if (!confirm('This app is designed for Android devices. Continue with download?')) {
-                    e.preventDefault();
-                }
-            }
-        });
+            <div class="app-details">
+                <h3>Quantum Simulator</h3>
+                <p>A quantum computing simulation application that demonstrates quantum computing concepts and simulations.</p>
+                <ul>
+                    <li>Interactive quantum circuit simulation</li>
+                    <li>Educational quantum computing demonstrations</li>
+                    <li>User-friendly interface</li>
+                    <li>System Requirements: Linux/Windows/Android compatible</li>
+                </ul>
+                <p>Version: 1.0.0</p>
+                <p>File Size: 56.3 MB</p>
+                <p class="download-note">Note: If download doesn't start automatically, click the link and select "Download"</p>
+            </div>
 
-        document.getElementById('desktop-download').addEventListener('click', function() {
-            console.log('Desktop download started');
-        });
-    </script>
-</div>
+            <div class="button-container">
+                <a href="https://www.dropbox.com/scl/fi/ozr16fz4hqitfy53xub22/QuantumSimulator.zip?rlkey=tbqcnfhut4nt5n18bl7oq461l&dl=1" 
+                   class="button" 
+                   target="_blank"
+                   id="desktop-download">Download for Desktop</a>
+                
+                   
+                <a href="https://www.dropbox.com/scl/fi/ozr16fz4hqitfy53xub22/QuantumSimulator.zip?rlkey=tbqcnfhut4nt5n18bl7oq461l&st=qzly2lse&dl=0" 
+                   class="button android" 
+                   target="_blank"
+                   id="android-download">Download for Android</a>
+                
+                <a href="https://avcderek.wixsite.com/my-site" 
+                   class="button" 
+                   style="background: #00ff00;">Visit My Wix Portfolio</a>
+            </div>
+        </div>
+    </div>
 
     <script>
+        // Matrix background animation
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
 
@@ -283,6 +268,20 @@
         }
 
         setInterval(draw, 33);
+
+        // Download button handlers
+        document.getElementById('desktop-download').addEventListener('click', function() {
+            console.log('Desktop download started');
+        });
+
+        document.getElementById('android-download').addEventListener('click', function(e) {
+            if(!this.href || this.href === '#') {
+                e.preventDefault();
+                alert('Android version coming soon!');
+            } else if(/Android/i.test(navigator.userAgent)) {
+                alert('After downloading, you may need to allow installation from unknown sources in your device settings to install the app.');
+            }
+        });
     </script>
 </body>
 </html>
