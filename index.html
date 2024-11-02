@@ -78,7 +78,7 @@
         }
 
         /* Text styling */
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             color: #0f0;
             margin-bottom: 15px;
             text-shadow: 0 0 10px #0f0;
@@ -139,11 +139,23 @@
             background: #3DDC84;
         }
 
-        .download-note {
+        /* Installation guide styling */
+        #install-guide {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #0f0;
+            border-radius: 5px;
+            background: rgba(0,255,0,0.1);
+            display: none;
+        }
+
+        #install-guide ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        #install-guide strong {
             color: #0f0;
-            font-size: 0.9em;
-            text-align: center;
-            margin-top: 15px;
         }
 
         @media (max-width: 600px) {
@@ -205,83 +217,73 @@
                     <li>Interactive quantum circuit simulation</li>
                     <li>Educational quantum computing demonstrations</li>
                     <li>User-friendly interface</li>
-                    <li>System Requirements: Linux/Windows/Android compatible</li>
+                    <li>System Requirements: Android 6.0 or higher</li>
                 </ul>
                 <p>Version: 1.0.0</p>
                 <p>File Size: 56.3 MB</p>
-                <p class="download-note">Note: If download doesn't start automatically, click the link and select "Download"</p>
+        
+                <!-- Android Installation Guide -->
+                <div id="install-guide" style="display: none; margin: 20px 0; padding: 15px; border: 1px solid #0f0; border-radius: 5px; background: rgba(0,255,0,0.1);">
+                    <h4 style="color: #0f0;">⚙️ First Time Setup:</h4>
+                    <ol style="margin-left: 20px; line-height: 1.8;">
+                        <li>Open your phone's <strong style="color: #0f0;">Settings</strong></li>
+                        <li>Tap <strong style="color: #0f0;">Security</strong> or <strong style="color: #0f0;">Privacy</strong></li>
+                        <li>Find and enable <strong style="color: #0f0;">"Install unknown apps"</strong> or <strong style="color: #0f0;">"Unknown sources"</strong></li>
+                    </ol>
+                    
+                    <h4 style="color: #0f0; margin-top: 15px;">📱 Installation Steps:</h4>
+                    <ol style="margin-left: 20px; line-height: 1.8;">
+                        <li>Click the Download button below</li>
+                        <li>When download completes, tap <strong style="color: #0f0;">OPEN</strong></li>
+                        <li>Tap <strong style="color: #0f0;">INSTALL</strong></li>
+                        <li>Tap <strong style="color: #0f0;">OPEN</strong> to launch the app</li>
+                    </ol>
+                    
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #0f0;">
+                        ℹ️ If you can't find the downloaded file, check your Downloads folder in Files app
+                    </p>
+                </div>
             </div>
-
+        
             <div class="button-container">
-                <a href="https://www.dropbox.com/scl/fi/ozr16fz4hqitfy53xub22/QuantumSimulator.zip?rlkey=tbqcnfhut4nt5n18bl7oq461l&dl=0" 
+                <!-- Desktop Download -->
+                <a href="https://www.dropbox.com/scl/fi/ozr16fz4hqitfy53xub22/QuantumSimulator.zip?rlkey=tbqcnfhut4nt5n18bl7oq461l&st=qzly2lse&dl=1" 
                    class="button" 
                    target="_blank"
                    id="desktop-download">Download for Desktop</a>
                 
-                   
-                <a href="https://www.dropbox.com/scl/fi/ozr16fz4hqitfy53xub22/QuantumSimulator.zip?rlkey=tbqcnfhut4nt5n18bl7oq461l&st=qzly2lse&dl=1" 
+                <!-- Android Download (Updated with your APK link) -->
+                <a href="https://www.dropbox.com/scl/fi/t62rc8jbgzn73dooglnby/QuantumSimulator.apk?rlkey=u5hxbym0nazmiw411xfp7q3cz&st=bw3r38qo&dl=1" 
                    class="button android" 
-                   target="_blank"
-                   id="android-download">Download for Android</a>
+                   id="android-download"
+                   download="QuantumSimulator.apk">Download for Android</a>
                 
                 <a href="https://avcderek.wixsite.com/my-site" 
                    class="button" 
                    style="background: #00ff00;">Visit My Wix Portfolio</a>
             </div>
         </div>
-    </div>
-
-    <script>
-        // Matrix background animation
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
-        const fontSize = 14;
-        const columns = Math.floor(canvas.width / fontSize);
         
-        const drops = new Array(columns).fill(1);
-
-        ctx.font = `${fontSize}px monospace`;
-
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#0F0';
-
-            for(let i = 0; i < drops.length; i++) {
-                const char = characters[Math.floor(Math.random() * characters.length)];
-                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-
-                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
+        <script>
+            const androidButton = document.getElementById('android-download');
+            const installGuide = document.getElementById('install-guide');
+            
+            androidButton.addEventListener('click', function() {
+                // Always show installation guide
+                installGuide.style.display = 'block';
+                
+                // Scroll to the instructions
+                setTimeout(() => {
+                    installGuide.scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+                
+                // Show different messages based on device
+                if(/Android/i.test(navigator.userAgent)) {
+                    alert('Please follow the installation steps below after downloading.');
+                } else {
+                    alert('This app is designed for Android devices. Please download using an Android device.');
                 }
-                drops[i]++;
-            }
-        }
-
-        setInterval(draw, 33);
-
-        // Download button handlers
-        document.getElementById('desktop-download').addEventListener('click', function() {
-            console.log('Desktop download started');
-        });
-
-        document.getElementById('android-download').addEventListener('click', function(e) {
-            if(!this.href || this.href === '#') {
-                e.preventDefault();
-                alert('Android version coming soon!');
-            } else if(/Android/i.test(navigator.userAgent)) {
-                alert('After downloading, you may need to allow installation from unknown sources in your device settings to install the app.');
-            }
-        });
-    </script>
+            });
+        </script>
 </body>
 </html>
